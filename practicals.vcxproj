@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Caesar.cpp" />
     <ClCompile Include="Cryptography.cpp" />
+    <ClCompile Include="Hill.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Playfair.cpp" />
   </ItemGroup>
