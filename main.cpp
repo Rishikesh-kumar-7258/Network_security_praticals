@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "Caesar.cpp"
+//#include "Caesar.cpp"
 #include "Playfair.cpp"
 #include <string>
 
@@ -25,13 +25,7 @@ int main() {
 	std::string cipher = caesar.encrypt(plain);
 	std::string decrypted = caesar.decrypt(cipher);*/
 
-	std::cout << "Encrypted: ";
-	for (int i = 0; i < cipher.size(); i++) {
-		std::cout << (char)cipher[i];
-	}
+	std::cout << "Encrypted: " << cipher << std::endl;
 
-	std::cout << std::endl << "Decrypted: ";
-	for (int i = 0; i < decrypted.size(); i++) {
-		std::cout << (char)decrypted[i];
-	}
+	std::cout << "Decrypted: " << decrypted << std::endl;
 }

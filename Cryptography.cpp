@@ -6,19 +6,22 @@ private:
 public:
 	Cryptography() {}
 
-	std::string encrypt(std::string plain) const {}
-	std::string decrypt(std::string cipher) const {}
+	std::string encrypt(std::string plain)  {}
+	std::string decrypt(std::string cipher)  {}
 
-	std::vector<int> removeSpaces(std::string str) const {
+	std::vector<int> removeSpaces(std::string &str) const {
 		int pos = 0;
 		std::vector<int> spaces;
 
-		for (char c : str) {
-			if (c == ' ') {
-				str.erase(pos, 1);
-				spaces.push_back(pos);
+		int i = 0;
+		while (i < str.size()) {
+			if (str[i] == ' ') {
+				str.erase(i, 1);
+				spaces.push_back(i);
 			}
-			pos++;
+			else {
+				i++;
+			}
 		}
 
 		return spaces;
