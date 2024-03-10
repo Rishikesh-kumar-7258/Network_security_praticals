@@ -33,5 +33,8 @@
     <ClCompile Include="Hill.cpp">
       <Filter>Source Files\Algorithms</Filter>
     </ClCompile>
+    <ClCompile Include="ColumnarTransposition.cpp">
+      <Filter>Source Files\Algorithms</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

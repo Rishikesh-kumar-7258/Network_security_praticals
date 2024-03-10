@@ -2,7 +2,8 @@
 #include <vector>
 //#include "Caesar.cpp"
 //#include "Playfair.cpp"
-#include "Hill.cpp"
+//#include "Hill.cpp"
+#include "ColumnarTransposition.cpp"
 #include <string>
 
 int main() {
@@ -10,13 +11,17 @@ int main() {
 	std::cout << "Enter a string: ";
 	std::getline(std::cin, plain);
 
-	/*std::string key;
+	std::string key;
 	std::cout << "Enter a key: ";
-	std::cin >> key;*/
+	std::cin >> key;
 
-	Hill hill;
+	ColumnarTransposition columnarTransposition(key);
+	std::string cipher = columnarTransposition.encrypt(plain);
+	std::string decrypted = columnarTransposition.decrypt(cipher);
+
+	/*Hill hill;
 	std::string cipher = hill.encrypt(plain);
-	std::string decrypted = hill.decrypt(cipher);
+	std::string decrypted = hill.decrypt(cipher);*/
 
 	/*Playfair playfair(key);
 	std::string cipher = playfair.encrypt(plain);
