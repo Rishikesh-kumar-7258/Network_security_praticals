@@ -53,4 +53,6 @@ int main() {
 	std::cout << "Encrypted: " << cipher << std::endl;
 
 	std::cout << "Decrypted: " << decrypted << std::endl;
+
+	return 0;
 }

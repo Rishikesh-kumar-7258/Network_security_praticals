@@ -107,6 +107,8 @@ private:
 	const int shiftBits[16] = { 1, 1, 2, 2, 2, 2, 2, 2,
 									1, 2, 2, 2, 2, 2, 2, 1 };
 
+	bool subkeys[16][48];
+
 	int key[64];
 
 	std::string stringToBits(const std::string& plain) {
@@ -123,11 +125,46 @@ private:
 		std::reverse(bits, bits + 28);
 	}
 
+	void generateSubkeys() {
+		// permutated choice 1
+		bool pc1Key[56];
+		for (int i = 0; i < 56; i++) {
+			pc1Key[i] = key[pc1[i] - 1];
+		}
+
+		// splitting in c and d
+		bool c[28], d[28];
+		for (int i = 0; i < 28; i++) {
+			c[i] = pc1Key[i];
+			d[i] = pc1Key[i + 28];
+		}
+
+		// 16 rounds
+		for (int i = 0; i < 16; i++) {
+			leftShift(c, shiftBits[i]);
+			leftShift(d, shiftBits[i]);
+
+			// combining c and d
+			bool cd[56];
+			for (int j = 0; j < 28; j++) {
+				cd[j] = c[j];
+				cd[j + 28] = d[j];
+			}
+
+			// permutated choice 2
+			for (int j = 0; j < 48; j++) {
+				subkeys[i][j] = cd[pc2[j] - 1];
+			}
+		}
+	}
+
 public:
-	DES(int key[64]) {
+	DES(int key[56]) {
 		for (int i = 0; i < 64; i++) {
 			this->key[i] = key[i];
 		}
+
+		generateSubkeys();
 	}
 
 	std::string encrypt(std::string plain) { 
@@ -142,14 +179,10 @@ public:
 
 		// checking if the last block is less than 64 bits
 		if (blocks[blocks.size() - 1].length() < 64) {
-			int n = 64 - blocks[blocks.size() - 1].length();
-
-			std::string temp = blocks[blocks.size() - 1];
-			for (int i = 0; i < n; i++) {
-				temp.insert(temp.begin(), '0');
+			int paddingAmount = 64 - blocks[blocks.size() - 1].length() % 64;
+			for (int i = 0; i < paddingAmount; i++) {
+				blocks[blocks.size() - 1] += (char)(paddingAmount);
 			}
-
-			blocks[blocks.size() - 1] = temp;
 		}
 
 		std::string cipher;
@@ -194,46 +227,10 @@ public:
 			right[i] = ipBlock[i + 32];
 		}
 
-		// converting 64 bit key to 56 bit key
-		int key56[56];
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 7; j++) {
-				key56[i * 7 + j] = key[i * 8 + j];
-			}
-		}
-
-		// permutated choice 1
-		bool pc1Key[56];
-		for (int i = 0; i < 56; i++) {
-			pc1Key[i] = key56[pc1[i] - 1];
-		}
-
-		// splitting in c and d
-		bool c[28], d[28];
-		for (int i = 0; i < 28; i++) {
-			c[i] = pc1Key[i];
-			d[i] = pc1Key[i + 28];
-		}
 
 		// 16 rounds
 		for (int i = 0; i < 16; i++) {
-			leftShift(c, shiftBits[i]);
-			leftShift(d, shiftBits[i]);
-
-			// combining c and d
-			bool cd[56];
-			for (int i = 0; i < 28; i++) {
-				cd[i] = c[i];
-				cd[i + 28] = d[i];
-			}
-
-			// permutated choice 2
-			bool pc2Key[48];
-			for (int i = 0; i < 48; i++) {
-				pc2Key[i] = cd[pc2[i] - 1];
-			}
-
-			roundDes(left, right, pc2Key, type ? 16-i : i+1);
+			roundDes(left, right, subkeys[type ? 15-i : i]);
 		}
 
 		// combining left and right
@@ -262,7 +259,7 @@ public:
 		return cipher;
 	}
 
-	void roundDes(bool* left, bool* right, bool *pc2Key, int round) {
+	void roundDes(bool* left, bool* right, bool *pc2Key) {
 		bool rightCopy[32];
 		for (int i = 0; i < 32; i++) {
 			rightCopy[i] = right[i];
