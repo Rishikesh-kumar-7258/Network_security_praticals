@@ -3,21 +3,36 @@
 //#include "Caesar.cpp"
 //#include "Playfair.cpp"
 //#include "Hill.cpp"
-#include "ColumnarTransposition.cpp"
+//#include "ColumnarTransposition.cpp"
+#include "DES.cpp"
 #include <string>
 
 int main() {
+
 	std::string plain;
 	std::cout << "Enter a string: ";
 	std::getline(std::cin, plain);
 
-	std::string key;
-	std::cout << "Enter a key: ";
-	std::cin >> key;
+	int key[64] = { 1, 0, 1, 0, 0, 0, 0, 1,
+					0, 1, 0, 0, 0, 0, 1, 0,
+					1, 0, 1, 0, 0, 0, 0, 1,
+					0, 1, 0, 0, 0, 0, 1, 0,
+					1, 0, 1, 0, 0, 0, 0, 1,
+					0, 1, 0, 0, 0, 0, 1, 0,
+					1, 0, 1, 0, 0, 0, 0, 1,
+					0, 1, 0, 0, 0, 0, 1, 0 };
 
-	ColumnarTransposition columnarTransposition(key);
+	DES des(key);
+	std::string cipher = des.encrypt(plain);
+	std::string decrypted = des.decrypt(cipher);
+
+	/*std::string key;
+	std::cout << "Enter a key: ";
+	std::cin >> key;*/
+
+	/*ColumnarTransposition columnarTransposition(key);
 	std::string cipher = columnarTransposition.encrypt(plain);
-	std::string decrypted = columnarTransposition.decrypt(cipher);
+	std::string decrypted = columnarTransposition.decrypt(cipher);*/
 
 	/*Hill hill;
 	std::string cipher = hill.encrypt(plain);

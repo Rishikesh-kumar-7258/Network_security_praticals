@@ -130,6 +130,7 @@
     <ClCompile Include="Caesar.cpp" />
     <ClCompile Include="ColumnarTransposition.cpp" />
     <ClCompile Include="Cryptography.cpp" />
+    <ClCompile Include="DES.cpp" />
     <ClCompile Include="Hill.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Playfair.cpp" />
