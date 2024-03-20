@@ -16,6 +16,9 @@
     <Filter Include="Source Files\Algorithms">
       <UniqueIdentifier>{16c984d1-ffe0-475c-bb16-a25c85aaeb89}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Algorithms\AES">
+      <UniqueIdentifier>{69c722e2-ba9a-4a78-9d65-afb167191f31}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -38,6 +41,9 @@
     </ClCompile>
     <ClCompile Include="DES.cpp">
       <Filter>Source Files\Algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="AES.cpp">
+      <Filter>Source Files\Algorithms\AES</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

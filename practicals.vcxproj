@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AES.cpp" />
     <ClCompile Include="Caesar.cpp" />
     <ClCompile Include="ColumnarTransposition.cpp" />
     <ClCompile Include="Cryptography.cpp" />

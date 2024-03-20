@@ -4,7 +4,7 @@
 //#include "Playfair.cpp"
 //#include "Hill.cpp"
 //#include "ColumnarTransposition.cpp"
-#include "DES.cpp"
+//#include "DES.cpp"
 #include <string>
 
 int main() {
@@ -13,7 +13,7 @@ int main() {
 	std::cout << "Enter a string: ";
 	std::getline(std::cin, plain);
 
-	int key[64] = { 1, 0, 1, 0, 0, 0, 0, 1,
+	/*int key[64] = { 1, 0, 1, 0, 0, 0, 0, 1,
 					0, 1, 0, 0, 0, 0, 1, 0,
 					1, 0, 1, 0, 0, 0, 0, 1,
 					0, 1, 0, 0, 0, 0, 1, 0,
@@ -24,7 +24,7 @@ int main() {
 
 	DES des(key);
 	std::string cipher = des.encrypt(plain);
-	std::string decrypted = des.decrypt(cipher);
+	std::string decrypted = des.decrypt(cipher);*/
 
 	/*std::string key;
 	std::cout << "Enter a key: ";
@@ -50,9 +50,9 @@ int main() {
 	std::string cipher = caesar.encrypt(plain);
 	std::string decrypted = caesar.decrypt(cipher);*/
 
-	std::cout << "Encrypted: " << cipher << std::endl;
+	//std::cout << "Encrypted: " << cipher << std::endl;
 
-	std::cout << "Decrypted: " << decrypted << std::endl;
+	//std::cout << "Decrypted: " << decrypted << std::endl;
 
 	return 0;
 }
