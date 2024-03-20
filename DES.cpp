@@ -1,3 +1,8 @@
+#ifndef DES_C
+#define DES_C
+
+
+
 #include "Cryptography.cpp"
 #include <bitset>
 
@@ -305,3 +310,5 @@ public:
 
 	}
 };
+
+#endif // !DES_C

@@ -1,3 +1,6 @@
+#ifndef CRYPTOGRAPHY_C
+#define CRYPTOGRAPHY_C
+
 #include <iostream>
 #include <vector>
 
@@ -57,3 +60,5 @@ public:
 	}
 
 };
+
+#endif // !CRYPTOGRAPHY_C

@@ -1,3 +1,7 @@
+#ifndef COLUMNARTRANSPOSITION_C
+#define COLUMNARTRANSPOSITION_C
+
+
 #include "Cryptography.cpp"
 #include <algorithm>
 
@@ -95,3 +99,5 @@ public:
 
 	}
 };
+
+#endif // !COLUMNARTRANSPOSITION_C

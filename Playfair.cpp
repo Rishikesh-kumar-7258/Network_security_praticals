@@ -1,3 +1,6 @@
+#ifndef PLAYFAIR_C
+#define PLAYFAIR_C
+
 #include "Cryptography.cpp"
 
 class Playfair : public Cryptography {
@@ -184,3 +187,5 @@ public:
 	}
 	
 };
+
+#endif // !PLAYFAIR_C

@@ -1,3 +1,6 @@
+#ifndef CAESAR_C
+#define CAESAR_C
+
 #include "Cryptography.cpp"
 
 class Caesar : public Cryptography {
@@ -40,3 +43,5 @@ public:
 		return plain;
 	}
 };
+
+#endif // !CAESAR_C

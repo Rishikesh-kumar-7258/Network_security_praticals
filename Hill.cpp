@@ -1,3 +1,7 @@
+#ifndef HILL_C
+#define HILL_C
+
+
 #include "Cryptography.cpp"
 
 class Hill : public Cryptography {
@@ -54,3 +58,5 @@ public:
 		return plain;
 	}
 };
+
+#endif // !HILL_C

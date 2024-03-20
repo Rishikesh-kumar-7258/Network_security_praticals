@@ -1,10 +1,11 @@
 #include <iostream>
 #include <vector>
-//#include "Caesar.cpp"
-//#include "Playfair.cpp"
-//#include "Hill.cpp"
-//#include "ColumnarTransposition.cpp"
-//#include "DES.cpp"
+#include "Caesar.cpp"
+#include "Playfair.cpp"
+#include "Hill.cpp"
+#include "ColumnarTransposition.cpp"
+#include "DES.cpp"
+#include "AES.cpp"
 #include <string>
 
 int main() {
@@ -12,6 +13,12 @@ int main() {
 	std::string plain;
 	std::cout << "Enter a string: ";
 	std::getline(std::cin, plain);
+
+	// AES
+	std::string key = "Thats my Kung Fu";
+	AES aes(key);
+	std::string cipher = aes.encrypt(plain);
+	std::string decrypted = aes.decrypt(cipher);
 
 	/*int key[64] = { 1, 0, 1, 0, 0, 0, 0, 1,
 					0, 1, 0, 0, 0, 0, 1, 0,
@@ -50,9 +57,9 @@ int main() {
 	std::string cipher = caesar.encrypt(plain);
 	std::string decrypted = caesar.decrypt(cipher);*/
 
-	//std::cout << "Encrypted: " << cipher << std::endl;
+	std::cout << "Encrypted: " << cipher << std::endl;
 
-	//std::cout << "Decrypted: " << decrypted << std::endl;
+	std::cout << "Decrypted: " << decrypted << std::endl;
 
 	return 0;
 }
