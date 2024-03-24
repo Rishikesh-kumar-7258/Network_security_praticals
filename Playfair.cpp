@@ -1,9 +1,9 @@
 #ifndef PLAYFAIR_C
 #define PLAYFAIR_C
 
-#include "Cryptography.cpp"
+#include "StreamCipher.cpp"
 
-class Playfair : public Cryptography {
+class Playfair : public StreamCipher {
 private:
 	std::vector<std::vector<char>> table;
 	std::string key;
@@ -22,7 +22,7 @@ public:
 
 		std::vector<bool> used(26, false);
 
-		int keyLen = this->key.size();
+		int keyLen = (int)this->key.size();
 		int i = 0, j = 0, k = 0;
 
 		while (k < keyLen) {
@@ -60,7 +60,7 @@ public:
 		}
 	}
 
-	std::string encrypt(std::string plain)  {
+	std::string encrypt(std::string plain) override {
 		plain = toLowerCase(plain);
 		std::vector<int> spaces = removeSpaces(plain);
 
@@ -121,7 +121,7 @@ public:
 		return encrypted;
 	}
 
-	std::string decrypt(std::string cipher) {
+	std::string decrypt(std::string cipher) override {
 		std::vector<int> spaces = removeSpaces(cipher);
 
 		std::string decrypted;

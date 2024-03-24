@@ -15,23 +15,16 @@ int main() {
 	std::getline(std::cin, plain);
 
 	// AES
-	std::string key = "Thats my Kung Fu";
+	/*std::string key = "Thats my Kung Fu";
 	AES aes(key);
 	std::string cipher = aes.encrypt(plain);
-	std::string decrypted = aes.decrypt(cipher);
+	std::string decrypted = aes.decrypt(cipher);*/
 
-	/*int key[64] = { 1, 0, 1, 0, 0, 0, 0, 1,
-					0, 1, 0, 0, 0, 0, 1, 0,
-					1, 0, 1, 0, 0, 0, 0, 1,
-					0, 1, 0, 0, 0, 0, 1, 0,
-					1, 0, 1, 0, 0, 0, 0, 1,
-					0, 1, 0, 0, 0, 0, 1, 0,
-					1, 0, 1, 0, 0, 0, 0, 1,
-					0, 1, 0, 0, 0, 0, 1, 0 };
+	std::string key = "Thats my Kung Fu";
 
 	DES des(key);
 	std::string cipher = des.encrypt(plain);
-	std::string decrypted = des.decrypt(cipher);*/
+	std::string decrypted = des.decrypt(cipher);
 
 	/*std::string key;
 	std::cout << "Enter a key: ";
@@ -60,6 +53,7 @@ int main() {
 	std::cout << "Encrypted: " << cipher << std::endl;
 
 	std::cout << "Decrypted: " << decrypted << std::endl;
+
 
 	return 0;
 }

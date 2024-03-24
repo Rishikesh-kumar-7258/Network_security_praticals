@@ -9,8 +9,8 @@ private:
 public:
 	Cryptography() {}
 
-	std::string encrypt(std::string plain)  {}
-	std::string decrypt(std::string cipher)  {}
+	virtual std::string encrypt(std::string plain) = 0;
+	virtual std::string decrypt(std::string cipher) = 0;
 
 	std::vector<int> removeSpaces(std::string &str) const {
 		int pos = 0;

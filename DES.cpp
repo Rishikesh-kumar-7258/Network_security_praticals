@@ -3,10 +3,10 @@
 
 
 
-#include "Cryptography.cpp"
+#include "BlockCipher.cpp"
 #include <bitset>
 
-class DES : public Cryptography {
+class DES : public BlockCipher {
 private:
 	const int ip[64] = { 58, 50, 42, 34, 26, 18, 10, 2,
 						60, 52, 44, 36, 28, 20, 12, 4,
@@ -114,7 +114,7 @@ private:
 
 	bool subkeys[16][48];
 
-	int key[64];
+	bool key[64];
 
 	std::string stringToBits(const std::string& plain) {
 		std::string bits = "";
@@ -164,50 +164,36 @@ private:
 	}
 
 public:
-	DES(int key[56]) {
+	DES(std::string key) {
+		key = key.substr(0, 8);
+
+		// converting key to bits
+		std::string bits = stringToBits(key);
+
+		// converting bits to bool
 		for (int i = 0; i < 64; i++) {
-			this->key[i] = key[i];
+			this->key[i] = bits[i] - '0';
 		}
 
 		generateSubkeys();
 	}
 
-	std::string encrypt(std::string plain) { 
-		// converting string to bits
-		std::string bits = stringToBits(plain);
+	std::string encrypt(std::string plain) override{ 
 
-		// splitting bits into 64-bit blocks
-		std::vector<std::string> blocks;
-		for (int i = 0; i < bits.length(); i += 64) {
-			blocks.push_back(bits.substr(i, 64));
-		}
-
-		// checking if the last block is less than 64 bits
-		if (blocks[blocks.size() - 1].length() < 64) {
-			int paddingAmount = 64 - blocks[blocks.size() - 1].length() % 64;
-			for (int i = 0; i < paddingAmount; i++) {
-				blocks[blocks.size() - 1] += (char)(paddingAmount);
-			}
-		}
-
+		std::vector<std::string> blocks = getBlocks(plain, 8);
 		std::string cipher;
-		for (std::string& s : blocks) cipher += processBlock(s, 0);
+		for (std::string& s : blocks) cipher += processBlock(stringToBits(s), 0);
 
 		return cipher;
 	}
 
-	std::string decrypt(std::string cipher) {
-		// converting string to bits
-		std::string bits = stringToBits(cipher);
-
-		// splitting bits into 64-bit blocks
-		std::vector<std::string> blocks;
-		for (int i = 0; i < bits.length(); i += 64) {
-			blocks.push_back(bits.substr(i, 64));
-		}
+	std::string decrypt(std::string cipher) override  {
+		std::vector<std::string> blocks = getBlocks(cipher, 8);
 
 		std::string plain;
-		for (std::string& s : blocks) plain += processBlock(s, 1);
+		for (std::string& s : blocks) plain += processBlock(stringToBits(s), 1);
+
+		plain = removePadding(plain, 8);
 
 		return plain;
 	}
@@ -218,7 +204,8 @@ public:
 	* type - 0 for encryption, 1 for decryption
 	* 	
 	*/
-	std::string processBlock(const std::string& block, int type) {
+	std::string processBlock(std::string block, int type)  {
+
 		// initial permutation
 		bool ipBlock[64];
 		for (int i = 0; i < 64; i++) {
@@ -264,7 +251,7 @@ public:
 		return cipher;
 	}
 
-	void roundDes(bool* left, bool* right, bool *pc2Key) {
+	void roundDes(bool* left, bool* right, bool *pc2Key) const {
 		bool rightCopy[32];
 		for (int i = 0; i < 32; i++) {
 			rightCopy[i] = right[i];

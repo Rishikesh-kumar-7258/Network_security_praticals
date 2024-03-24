@@ -1,9 +1,9 @@
 #ifndef CAESAR_C
 #define CAESAR_C
 
-#include "Cryptography.cpp"
+#include "StreamCipher.cpp"
 
-class Caesar : public Cryptography {
+class Caesar : public StreamCipher {
 private:
 	int shift;
 public:
@@ -12,7 +12,7 @@ public:
 		this->shift = shift;
 	}
 
-	std::string encrypt(std::string plain) const {
+	std::string encrypt(std::string plain) override {
 		plain = toLowerCase(plain);
 		std::cout << plain << std::endl;
 
@@ -30,7 +30,7 @@ public:
 		return cipher;
 	}
 
-	std::string decrypt(std::string cipher) const{
+	std::string decrypt(std::string cipher) override {
 		std::string plain;
 		for (int i = 0; i < cipher.size(); i++) {
 			if (cipher[i] == ' ' || cipher[i] == '\n' || cipher[i] == '\t') {

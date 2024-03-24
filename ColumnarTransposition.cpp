@@ -2,10 +2,10 @@
 #define COLUMNARTRANSPOSITION_C
 
 
-#include "Cryptography.cpp"
+#include "StreamCipher.cpp"
 #include <algorithm>
 
-class ColumnarTransposition : public Cryptography {
+class ColumnarTransposition : public StreamCipher {
 private:
 	std::string key;
 public:
@@ -14,11 +14,11 @@ public:
 		this->key = toLowerCase(key);
 	}
 
-	std::string encrypt(std::string plain) {
+	std::string encrypt(std::string plain) override {
 		plain = toLowerCase(plain);
 		std::vector<int> spaces = removeSpaces(plain);
 
-		int rows = plain.size() / key.size();
+		int rows = (int)(plain.size() / key.size());
 		if (plain.size() % key.size() != 0) {
 			rows++;
 		}
@@ -52,20 +52,20 @@ public:
 			}
 		}
 
-		int i = key.size();
+		int i = (int)key.size();
 		while (i < cipher.size()) {
 			cipher.insert(i, " ");
 
-			i += key.size() + 1;
+			i += (int)key.size() + 1;
 		}
 
 		return cipher;
 	}
 
-	std::string decrypt(std::string cipher) {
+	std::string decrypt(std::string cipher) override {
 		std::vector<int> spaces = removeSpaces(cipher);
 
-		int rows = cipher.size() / key.size();
+		int rows = (int)(cipher.size() / key.size());
 		if (cipher.size() % key.size() != 0) {
 			rows++;
 		}

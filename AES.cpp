@@ -1,9 +1,9 @@
 #ifndef AES_C
 #define AES_C
 
-#include "Cryptography.cpp"
+#include "BlockCipher.cpp"
 
-class AES : public Cryptography{
+class AES : public BlockCipher{
 private:
 	const int nk = 4; // number of 32-bit words in the key
 	const int nb = 4; // block size in 32-bit words
@@ -176,7 +176,7 @@ private:
 	}
 	
 public:
-	AES(std::string key) : Cryptography() {
+	AES(std::string key) : BlockCipher() {
 		this->key = std::vector<uint32_t>(4);
 		this->w = std::vector<uint32_t>(44);
 		for (int i = 0; i < 4; i++) {
@@ -187,7 +187,7 @@ public:
 		keyExpansion();
 	}
 
-	std::string encrypt(std::string plainText) {
+	std::string encrypt(std::string plainText) override {
 		// if plaintext is not divisible by 16, pad with spaces
 		while (plainText.size() % 16 != 0) {
 			plainText += ' ';
@@ -211,7 +211,7 @@ public:
 		return cipherText;
 	}
 
-	std::string decrypt(std::string cipherText) {
+	std::string decrypt(std::string cipherText) override  {
 
 		std::string plaintext = "";
 		for (int i = 0; i < cipherText.size(); i += 16) {

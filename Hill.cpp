@@ -1,10 +1,9 @@
 #ifndef HILL_C
 #define HILL_C
 
+#include "StreamCipher.cpp"
 
-#include "Cryptography.cpp"
-
-class Hill : public Cryptography {
+class Hill : public StreamCipher {
 private:
 	std::vector<std::vector<int>> encryptionKey, decryptionKey;
 public:
@@ -14,7 +13,7 @@ public:
 		decryptionKey = { {12, 19}, {21, 3} };
 	}
 
-	std::string encrypt(std::string plain) {
+	std::string encrypt(std::string plain) override {
 		
 		std::vector<int> spaces = removeSpaces(plain);
 
@@ -38,7 +37,7 @@ public:
 		return cipher;
 	}
 
-	std::string decrypt(std::string cipher) {
+	std::string decrypt(std::string cipher) override {
 
 		std::string plain;
 

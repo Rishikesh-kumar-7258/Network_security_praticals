@@ -13,10 +13,13 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Algorithms">
-      <UniqueIdentifier>{16c984d1-ffe0-475c-bb16-a25c85aaeb89}</UniqueIdentifier>
+    <Filter Include="Source Files\StreamCipher">
+      <UniqueIdentifier>{99a068d3-2717-4223-847d-67380ad1c104}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Algorithms\AES">
+    <Filter Include="Source Files\BlockCipher">
+      <UniqueIdentifier>{30cfd9ad-d3de-4b98-a0dc-b26e920450e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BlockCipher\AES">
       <UniqueIdentifier>{69c722e2-ba9a-4a78-9d65-afb167191f31}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -24,26 +27,32 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cryptography.cpp">
-      <Filter>Source Files\Algorithms</Filter>
+    <ClCompile Include="AES.cpp">
+      <Filter>Source Files\BlockCipher\AES</Filter>
     </ClCompile>
-    <ClCompile Include="Caesar.cpp">
-      <Filter>Source Files\Algorithms</Filter>
+    <ClCompile Include="Cryptography.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StreamCipher.cpp">
+      <Filter>Source Files\StreamCipher</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockCipher.cpp">
+      <Filter>Source Files\BlockCipher</Filter>
     </ClCompile>
     <ClCompile Include="Playfair.cpp">
-      <Filter>Source Files\Algorithms</Filter>
+      <Filter>Source Files\StreamCipher</Filter>
     </ClCompile>
     <ClCompile Include="Hill.cpp">
-      <Filter>Source Files\Algorithms</Filter>
+      <Filter>Source Files\StreamCipher</Filter>
+    </ClCompile>
+    <ClCompile Include="Caesar.cpp">
+      <Filter>Source Files\StreamCipher</Filter>
     </ClCompile>
     <ClCompile Include="ColumnarTransposition.cpp">
-      <Filter>Source Files\Algorithms</Filter>
+      <Filter>Source Files\StreamCipher</Filter>
     </ClCompile>
     <ClCompile Include="DES.cpp">
-      <Filter>Source Files\Algorithms</Filter>
-    </ClCompile>
-    <ClCompile Include="AES.cpp">
-      <Filter>Source Files\Algorithms\AES</Filter>
+      <Filter>Source Files\BlockCipher</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
